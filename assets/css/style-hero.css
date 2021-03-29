@@ -1,0 +1,75 @@
+@charset "UTF-8";
+
+.super-hero-cards {
+  display: inline-flex;
+  flex-flow: column nowrap;
+  width: 220px;
+  overflow: hidden;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 0 20px;
+  border-radius: 15px;
+  align-items: center;
+  margin: 0.5vw;
+}
+.super-hero-cards h1 {
+  font-family: "Sriracha", cursive;
+  color: black;
+  font-size: 18px;
+  text-transform: uppercase;
+}
+
+.super-hero-cards figure {
+  width: 90%;
+  height: auto;
+  display: flex;
+  align-items: center;
+}
+
+.super-hero-cards figure img {
+  width: 100%;
+  height: auto;
+}
+
+.skills {
+  margin-top: 15px;
+  margin-bottom: -10px;
+  border-top: 3px solid black;
+  border-bottom: 3px solid black;
+  width: auto;
+  height: 70px;
+  overflow: hidden;
+}
+
+.skills,
+.biography {
+  font-family: "Roboto", sans-serif;
+  font-weight: 600;
+}
+
+.skills {
+  font-size: 15px;
+}
+
+.skills table tr td:first-child {
+  text-align: left;
+}
+.skills table tr td:last-child {
+  text-align: right;
+}
+
+.skills table tr:first-child td {
+  color: rgb(215, 50, 0);
+}
+
+.skills table tr:nth-child(2) td {
+  color: black;
+}
+
+.skills table tr:nth-child(3) td {
+  color: rgb(0, 131, 218);
+}
+
+.biography p {
+  font-size: 12px;
+  display: block;
+  margin: 15px;
+}
