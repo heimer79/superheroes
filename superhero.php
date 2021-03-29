@@ -212,7 +212,7 @@ function activate_au()
 {
 	require_once ( 'inc/wp_autoupdate.php' );
 	$plugin_current_version = '0.2.0';
-	$plugin_remote_path = plugin_dir_url( __FILE__ ) . '/inc/update.php';
+	$plugin_remote_path = 'https://heimerwp.com/superhero/inc/update.php';
 	$plugin_slug = plugin_basename( __FILE__ );
 	new WP_AutoUpdate ( $plugin_current_version, $plugin_remote_path, $plugin_slug);
 }
