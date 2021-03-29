@@ -10,9 +10,9 @@ if ( !isset( $_POST['action'] ) ) {
 
 //set up the properties common to both requests 
 $obj = new stdClass();
-$obj->slug = 'plugin.php';  
-$obj->name = 'Plugin';
-$obj->plugin_name = 'plugin.php';
+$obj->slug = 'superhero.php';  
+$obj->name = 'Super Hero';
+$obj->plugin_name = 'superhero.php';
 $obj->new_version = '0.2.0';
 // the url for the plugin homepage
 $obj->url = 'https://github.com/heimer79/superheroes';
@@ -26,8 +26,8 @@ case 'version':
 	echo json_encode( $obj );
 	break;  
 case 'info':   
-	$obj->requires = '0.1.0';  
-	$obj->tested = '0.1.9';  
+	$obj->requires = '0.1.9';  
+	$obj->tested = '0.1.8';  
 	$obj->downloaded = 12540;  
 	$obj->last_updated = '2021-03-29';  
 	$obj->sections = array(  
