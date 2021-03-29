@@ -1,11 +1,11 @@
 <?php
 /**
  * Plugin Name: Super Hero
- * Plugin URI: https://github.com/heimer79?tab=repositories
+ * Plugin URI: https://github.com/heimer79/superheroes
  * Description: include cards from https://superheroapi.com/
- * Version: 0.1.0
+ * Version: 0.2.0
  * Author: Heimer Martinez
- * Author URI: 
+ * Author URI: https://github.com/heimer79/
  * Text Domain: superhero
  */
 
@@ -30,8 +30,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+
  
 include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+
+        $plugin_dir = plugin_dir_url(__FILE__);
+        $url_site = site_url().'/';
+        $path_plugin_relative = str_replace ($url_site, '',$plugin_dir);
+
+
+        include ( ABSPATH . $path_plugin_relative.'inc/options.php');
 
 
 if (is_plugin_active('superhero/superhero.php')) {
@@ -76,12 +84,6 @@ if (is_plugin_active('superhero/superhero.php')) {
 
 }
 
-// Version of the plugin
-define('SUPERHERO_CURRENT_VERSION', '0.1.0' );
-
-
-
-
 if (! function_exists('call_superhero')) {
     // Add Shortcode    
     /**
@@ -92,6 +94,9 @@ if (! function_exists('call_superhero')) {
      */
     function call_superhero($idhero)
     {
+
+       global $token_0;
+
         if (is_singular() && !is_admin()) {
             // Attributes
             $idhero = shortcode_atts(
@@ -105,7 +110,7 @@ if (! function_exists('call_superhero')) {
 
 						//call API with token 
 
-            $data = file_get_contents("https://superheroapi.com/api/10223427067319075/$idhero");
+            $data = file_get_contents("https://superheroapi.com/api/$token_0/$idhero");
             $content = json_decode($data, true);
 
 						//extract every field from json format 
@@ -162,4 +167,52 @@ if (! function_exists('call_superhero')) {
 add_shortcode( 'superheroes', 'call_superhero' );
 
 
+add_action( 'admin_print_footer_scripts', 'quicktags_so_42200158' );
 
+function quicktags_so_42200158() {
+    if ( wp_script_is( 'quicktags' ) ) {
+        wp_enqueue_script('jquery');
+        ?>
+        <script>
+        /* Button name and callback will be replaced */
+        QTags.addButton( 'dummy_button', 'Dummy button', function(){} );
+
+        jQuery(window).load( function() {
+            jQ = jQuery;
+
+         
+            var data = {
+                '-': 'Select shortcode',
+                'superheroes': 'Superheroes',
+            }
+            var s = jQ('<select />');
+            s.attr('id','my-shortcodes');
+            for(var val in data) {
+                jQ('<option />', {value: val, text: data[val]}).appendTo(s);
+            }
+
+            
+            jQ('#qt_content_dummy_button')[0].outerHTML = s[0].outerHTML;
+
+            /* What will be inserted on HTML editor */
+            jQ('#my-shortcodes').on('change', function(){
+                var sc = '[' + jQ(this).val() + ' heroid="" '+']';
+                QTags.insertContent(sc);
+            });
+        });
+        </script>
+        <?php
+    }
+}
+
+
+// Load the auto-update class
+add_action( 'init', 'activate_au' );
+function activate_au()
+{
+	require_once ( 'inc/wp_autoupdate.php' );
+	$plugin_current_version = '0.2.0';
+	$plugin_remote_path = plugin_dir_url( __FILE__ ) . '/inc/update.php';
+	$plugin_slug = plugin_basename( __FILE__ );
+	new WP_AutoUpdate ( $plugin_current_version, $plugin_remote_path, $plugin_slug);
+}
