@@ -15,6 +15,7 @@
   color: black;
   font-size: 18px;
   text-transform: uppercase;
+  margin: 0 !important;
 }
 
 .super-hero-cards figure {
@@ -35,8 +36,9 @@
   border-top: 3px solid black;
   border-bottom: 3px solid black;
   width: auto;
-  height: 70px;
-  overflow: hidden;
+  height: auto;
+  max-height: 70px;
+  min-height: 60px;
 }
 
 .skills,
