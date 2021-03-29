@@ -109,8 +109,6 @@ class WP_AutoUpdate
 		$params = array(
 			'body' => array(
 				'action'       => $action,
-				'license_user' => $this->license_user,
-				'license_key'  => $this->license_key,
 			),
 		);
 		
